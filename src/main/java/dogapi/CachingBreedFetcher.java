@@ -22,16 +22,12 @@ public class CachingBreedFetcher implements BreedFetcher {
     }
 
     @Override
-    public List<String> getSubBreeds(String breed) {
+    public List<String> getSubBreeds(String breed) throws BreedNotFoundException {
         if (subBreeds.containsKey(breed)) {
             return subBreeds.get(breed);
         }
         this.callsMade++;
-        try {
-            subBreeds.put(breed, this.fetcher.getSubBreeds(breed));
-        } catch (BreedNotFoundException e) {
-            throw new BreedNotFoundException(breed);
-        }
+        subBreeds.put(breed, this.fetcher.getSubBreeds(breed));
         // return statement included so that the starter code can compile and run.
         return subBreeds.get(breed);
     }

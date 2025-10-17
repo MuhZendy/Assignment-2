@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws BreedFetcher.BreedNotFoundException {
         String breed = "hound";
         BreedFetcher breedFetcher = new CachingBreedFetcher(new BreedFetcherForLocalTesting());
         int result = getNumberOfSubBreeds(breed, breedFetcher);
@@ -25,7 +25,13 @@ public class Main {
      */
     public static int getNumberOfSubBreeds(String breed, BreedFetcher breedFetcher) {
         // TODO Task 3 implement this code so that it is entirely consistent with its provided documentation.
-        // return statement included so that the starter code can compile and run.
-        return -1;
+        // return statement included so that the starter code can compile and run
+        List<String> breeds;
+        try {
+            breeds = breedFetcher.getSubBreeds(breed);
+        } catch (BreedFetcher.BreedNotFoundException e) {
+            return -1;
+        }
+        return breeds.size();
     }
 }
