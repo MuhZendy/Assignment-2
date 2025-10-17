@@ -29,7 +29,7 @@ public class Main {
         try {
             breeds = breedFetcher.getSubBreeds(breed);
         } catch (BreedFetcher.BreedNotFoundException e) {
-            return -1;
+            return 0;
         }
         return breeds.size();
     }
